@@ -45,7 +45,6 @@ function showCake() {
     giftBox_2.classList.add('zoom-out'); // Add zoom-in effect to cake
     giftBox_2.style.display = 'none';
     document.body.style.animation = `${gifs[currentSongIndex]} 20s infinite`;
-    playNextSong()
     songs[currentSongIndex].play();
     showMessage("Time to unlit candle and make a wish...");
     cake.style.display = 'block';
