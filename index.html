@@ -19,7 +19,112 @@
 		align-items: center;
 		height: 100vh;
 		flex-direction: column;
-		animation: colorChange 10s infinite;
+		animation: colorChange 20s infinite;
+	}
+
+	@keyframes gifAnimation {
+		0% {
+			background-image: url('./public/loli.gif');
+			opacity: 0.8;
+		}
+
+		13% {
+			background-image: url('./public/loli1.gif');
+			opacity: 1;
+		}
+
+		26% {
+			background-image: url('./public/loli2.gif');
+			opacity: 0.8;
+		}
+
+		39% {
+			background-image: url('./public/loli3.gif');
+			opacity: 1;
+		}
+
+		52% {
+			background-image: url('./public/loli5.gif');
+			opacity: 0.9;
+		}
+		65% {
+			background-image: url('./public/loli6.gif');
+			opacity: 0.9;
+		}
+		78% {
+			background-image: url('./public/loli7.gif');
+			opacity: 0.9;
+		}
+		100% {
+			background-image: url('./public/loli8.gif');
+			opacity: 0.9;
+		}
+	}
+
+	@keyframes dirtygifAnimation {
+		0% {
+			background-image: url('./public/loli12.gif');
+			opacity: 0.8;
+		}
+
+		13% {
+			background-image: url('./public/loli13.gif');
+			opacity: 1;
+		}
+
+		26% {
+			background-image: url('./public/loli14.gif');
+			opacity: 0.8;
+		}
+
+		39% {
+			background-image: url('./public/loli15.gif');
+			opacity: 1;
+		}
+
+		52% {
+			background-image: url('./public/loli16.gif');
+			opacity: 0.8;
+		}
+		65% {
+			background-image: url('./public/loli17.gif');
+			opacity: 0.8;
+		}
+		78% {
+			background-image: url('./public/loli18.gif');
+			opacity: 0.8;
+		}
+		100% {
+			background-image: url('./public/loli19.gif');
+			opacity: 0.8;
+		}
+	}
+
+	@keyframes dirtygifAnimation {
+		0% {
+			background-image: url('./public/loli20.gif');
+			opacity: 0.8;
+		}
+
+		20% {
+			background-image: url('./public/loli23.gif');
+			opacity: 1;
+		}
+
+		40% {
+			background-image: url('./public/loli22.gif');
+			opacity: 0.8;
+		}
+
+		60% {
+			background-image: url('./public/loli21.gif');
+			opacity: 1;
+		}
+
+		100% {
+			background-image: url('./public/loli24.gif');
+			opacity: 0.8;
+		}
 	}
 
 	canvas {
@@ -35,19 +140,21 @@
 	}
 
 	#cake,
-	#flork{
+	#flork {
 		display: none;
 		animation: zoomIn 2s ease-in-out forwards;
-		width:100%;
-		margin : auto;
-		
+		width: 100%;
+		margin: auto;
+
 	}
-	#image2{
+
+	#image2 {
 		display: none;
 		animation: zoomIn 2s ease-in-out forwards;
-		width:60%;
-		height:50%;		
+		width: 60%;
+		height: 50%;
 	}
+
 	#flork {
 		position: relative;
 	}
@@ -84,14 +191,14 @@
 		display: none;
 		perspective: 1000px;
 		animation: zoomIn 2s ease-in-out forwards;
-		width:50%;
-		margin : auto;
+		width: 50%;
+		margin: auto;
 		flex-direction: row;
 		flex-wrap: nowrap;
 		align-content: space-around;
 		justify-content: space-evenly;
 		align-items: center;
-		height:50%;
+		height: 50%;
 	}
 
 	.card {
@@ -100,7 +207,7 @@
 		transform-style: preserve-3d;
 		transition: transform 1s;
 	}
-	
+
 
 	#candles {
 		background-color: #ddd;
@@ -112,7 +219,7 @@
 		align-items: center;
 	}
 
-	.page  {
+	.page {
 		width: 100%;
 		height: 100%;
 		position: absolute;
@@ -127,16 +234,18 @@
 		overflow: hidden;
 		animation: colorChangePage 10s infinite;
 	}
-	.pages{
+
+	.pages {
 		width: 50%;
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 1s;
 		width: 100%;
 		height: 100%;
-		
+
 		animation: colorChangePage 10s infinite;
 	}
+
 	.front {
 		z-index: 2;
 	}
@@ -191,87 +300,99 @@
 	}
 
 
-@keyframes colorChange {
-    0% {
-        background-color: #ffcc00;
-    }
-    25% {
-        background-color: #fa1a65;
-    }
-    50% {
-        background-color: #24a9ec;
-    }
-    75% {
-        background-color: #24e824;
-    }
-    100% {
-        background-color: #ffcc00;
-    }
-}
-@keyframes colorChangePage {
-    0% {
-        background-color: #ffe88a;
-    }
-    25% {
-        background-color: #ff6699;
-    }
-    50% {
-        background-color: #7fd1fa;
-    }
-    75% {
-        background-color: #7ff77f;
-    }
-    100% {
-        background-color: #ffcc00;
-    }
-}
+	@keyframes colorChange {
+		0% {
+			background-color: #ffcc00;
+		}
 
-#textArea {
-	position: absolute;
-	bottom: 10px;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-	z-index: 3;
-}
+		25% {
+			background-color: #fa1a65;
+		}
 
-#alert {
-    font-size: 3em;
-    font-weight: bold;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 10px;
-    border-radius: 10px;
-    animation: fadeIn 2s ease-in-out;
-}
+		50% {
+			background-color: #24a9ec;
+		}
 
-.pages .content{
-	width:100%;
-	height:100%;
-	color:white !important;
-}
-.front{
-	background-image: url("https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif");
-}
-.back{
-	background-image: url("./public/party.gif");
-}
+		75% {
+			background-color: #24e824;
+		}
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
+		100% {
+			background-color: #ffcc00;
+		}
+	}
+
+	@keyframes colorChangePage {
+		0% {
+			background-color: #ffe88a;
+		}
+
+		25% {
+			background-color: #ff6699;
+		}
+
+		50% {
+			background-color: #7fd1fa;
+		}
+
+		75% {
+			background-color: #7ff77f;
+		}
+
+		100% {
+			background-color: #ffcc00;
+		}
+	}
+
+	#textArea {
+		position: absolute;
+		bottom: 10px;
+		background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+		padding: 30px;
+		border-radius: 15px;
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+		text-align: center;
+		z-index: 3;
+	}
+
+	#alert {
+		font-size: 3em;
+		font-weight: bold;
+		color: white;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+		background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		padding: 10px;
+		border-radius: 10px;
+		animation: fadeIn 2s ease-in-out;
+	}
+
+	.pages .content {
+		width: 100%;
+		height: 100%;
+		color: white !important;
+	}
+
+	.front {
+		background-image: url("https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif");
+	}
+
+	.back {
+		background-image: url("./public/party.gif");
+	}
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+			transform: scale(0.8);
+		}
+
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
 </style>
 
 <body>
@@ -285,23 +406,23 @@
 		</div>
 
 	</div>
-	<audio id="celebrationSong" src="./public/felizcumple.mp3" loop="true"></audio>
+	<audio id="celebrationSong" src="./public/nyanpasu.mp3" ></audio>
+	<audio id="celebrationSong2" src="./public/ice cream.mp3" ></audio>
 	<div id="textArea">
 		<h2 id="alert"></h2>
 	</div>
-	<img id="image2" src="./public/hold-on-wait-a-minute.gif"
-						alt="Hold up wait a minute">
+	<img id="image2" src="./public/hold-on-wait-a-minute.gif" alt="Hold up wait a minute">
 	<div class="card-container">
 		<div class="card">
 			<img id="flork" src="./public/flork.png" alt="Cake with Candles">
 		</div>
-			<!-- Page 1 -->
+		<!-- Page 1 -->
 		<div class="pages">
 			<div class="page front">
 				<div class="content">
 					<h2>Happy Birthday!</h2>
 					<p>Wishing you a day filled with love and joy.</p>
-					
+
 				</div>
 				<button class="flip-button" onclick="flipPage()">Flip Page</button>
 			</div>
@@ -335,22 +456,22 @@
 			pages.style.transform = 'rotateY(0deg)';
 		}
 	}
-// Function to show the message container only if there's text
-function showMessage(text) {
-    const messageContainer = document.getElementById('textArea');
-    const stylishMessage = document.getElementById('alert');
+	// Function to show the message container only if there's text
+	function showMessage(text) {
+		const messageContainer = document.getElementById('textArea');
+		const stylishMessage = document.getElementById('alert');
 
-    if (text.trim() !== '') {
-        stylishMessage.textContent = text;
-        messageContainer.style.display = 'block';
-    } else {
-        messageContainer.style.display = 'none';
-    }
-}
-showMessage("");
-// Example usage
+		if (text.trim() !== '') {
+			stylishMessage.textContent = text;
+			messageContainer.style.display = 'block';
+		} else {
+			messageContainer.style.display = 'none';
+		}
+	}
+	showMessage("");
+	// Example usage
 
-// showMessage(''); // This would hide the container
+	// showMessage(''); // This would hide the container
 
 </script>
 

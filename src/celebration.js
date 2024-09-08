@@ -1,4 +1,5 @@
 const celebrationSong = document.getElementById('celebrationSong');
+const celebrationSong2 = document.getElementById('celebrationSong2');
 const giftBox_1 = document.getElementById('giftBox1');
 const giftBox_2 = document.getElementById('giftBox2');
 const cake = document.getElementById('cake');
@@ -12,6 +13,30 @@ let allCandlesUnlit = false;
 canvas = document.getElementById("mycanvas");
 ctx = canvas.getContext("2d");
 
+let currentSongIndex = 0;
+const songs = [celebrationSong, celebrationSong2];
+const gifs = ["dirtygifAnimation", "gifAnimation"];
+// Function to play the next song
+function playNextSong() {
+  // Stop any currently playing song
+  songs[currentSongIndex].pause();
+  songs[currentSongIndex].currentTime = 0;
+  document.body.style.animation = ``;
+  // Move to the next song in the queue
+  currentSongIndex = (currentSongIndex + 1) % songs.length;
+  document.body.style.animation = `${gifs[currentSongIndex]} 20s infinite`;
+  songs[currentSongIndex].play();
+}
+
+// Attach event listeners to the "ended" event for both songs
+songs.forEach(song => {
+  song.addEventListener('ended', playNextSong);
+});
+
+// Start playing the first song
+
+
+
 async function showGiftBox2() { 
     giftBox_1.style.display = 'none';
     giftBox_2.style.display = 'block';
@@ -19,7 +44,9 @@ async function showGiftBox2() {
 function showCake() {
     giftBox_2.classList.add('zoom-out'); // Add zoom-in effect to cake
     giftBox_2.style.display = 'none';
-    celebrationSong.play();
+    document.body.style.animation = `${gifs[currentSongIndex]} 20s infinite`;
+    playNextSong()
+    songs[currentSongIndex].play();
     showMessage("Time to unlit candle and make a wish...");
     cake.style.display = 'block';
     setTimeout(()=>{
@@ -88,7 +115,6 @@ function unlitCandle(e) {
                 book.classList.add('zoom-in'); // Add zoom-in effect to cake
                 flork.style.display = 'block';
                 flork.classList.add('zoom-in');
-                document.getElementsByTagName("body")[0].style.backgroundImage = 'url(../public/minion.gif)';
             }, 5000);
             
         }
