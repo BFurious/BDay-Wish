@@ -17,6 +17,7 @@ var showList = new Array();
 var positionList = new Array();
 
 
+
 (function (n) {
 	isFirefox = (n.toLowerCase().indexOf('firefox') >= 0);
 
@@ -32,25 +33,26 @@ var positionList = new Array();
 	}
 })(navigator.userAgent);
 
-window.rAF = (function(){
-  return (
-  		window.requestAnimationFrame || 
-		window.webkitRequestAnimationFrame || 
-		window.mozRequestAnimationFrame || 
-		window.oRequestAnimationFrame || 
-		window.msRequestAnimationFrame || 
-		function(callback){
+window.rAF = (function () {
+	return (
+		window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		function (callback) {
 			window.setTimeout(callback, 1000 / 60);
 		}
 	);
 })();
 
-function main () {
+function main() {
 	var loadList = [
 		"./src/Sprite.js",
 		"./src/Particle.js",
 		"./src/Stage.js",
-		"./src/Txt.js"
+		"./src/Txt.js",
+		"./src/celebration.js"
 	];
 
 	var startLoad = function (configPath) {
@@ -72,7 +74,6 @@ function main () {
 
 					particleW = config.stageW / config.col;
 					particleH = config.stageH / config.row;
-
 					init();
 				}
 			}
@@ -81,9 +82,9 @@ function main () {
 	};
 
 	var getQueryStringByName = function (name) {
-		var result = window.location.search.match(new RegExp("[\?\&]" + name+ "=([^\&]+)","i"));
+		var result = window.location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
 
-		if(result === null || result.length < 1){
+		if (result === null || result.length < 1) {
 			return null;
 		}
 
@@ -98,8 +99,22 @@ function main () {
 		startLoad(configFileQueryStr);
 	}
 }
+async function clearCanvas(ctx, canvasWidth, canvasHeight) {
+	await ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+}
 
-function init () {
+async function delay() {
+
+
+	showMessage("");
+	showList.length = 0;
+	giftBox_1.style.display = 'block';
+	await showMessage("Time to open ur gift 😉😏")
+	return;
+}
+
+
+function init() {
 	document.title = config.documentTitle;
 
 	canvasTag = document.getElementById("mycanvas");
@@ -108,38 +123,43 @@ function init () {
 	ctx = canvasTag.getContext("2d");
 
 	var eventType = mobile ? "touchstart" : "mouseup";
-
 	fullScreen();
 	addStage();
 	addInstructions();
 	getParticlesPosition();
 	canvasTag.addEventListener(
 		eventType,
-		function (e) {
-			e.preventDefault();
-			e.stopPropagation();
+		async function (e) {
+			if (positionList.length) {
+				console.log(positionList.length);
+				e.preventDefault();
+				e.stopPropagation();
 
-			if (prefaceIndex++ >= config.preface.length - 1) {
-				prefaceTxt.visible = false;
+				if (prefaceIndex++ >= config.preface.length - 1) {
+					prefaceTxt.visible = false;
+				} else {
+					prefaceTxt.text = config.preface[prefaceIndex];
+				}
+
+				if (e.offsetX == null && e.layerX != null) {
+					e.offsetX = e.layerX;
+					e.offsetY = e.layerY;
+				}
+
+				if (mobile) {
+					e.offsetX = e.touches[0].pageX - canvasX;
+					e.offsetY = e.touches[0].pageY - canvasY;
+				}
+
+				var startX = scaleOffsetX(e.offsetX),
+					startY = scaleOffsetY(e.offsetY);
+				for (var i = 0; i < config.emitterNum; i++) {
+					addParticle(startX, startY);
+				}
+
 			} else {
-				prefaceTxt.text = config.preface[prefaceIndex];
-			}
-
-			if (e.offsetX == null && e.layerX != null) {
-				e.offsetX = e.layerX;
-				e.offsetY = e.layerY;
-			}
-
-			if (mobile) {
-				e.offsetX = e.touches[0].pageX - canvasX;
-				e.offsetY = e.touches[0].pageY - canvasY;
-			}
-
-			var startX = scaleOffsetX(e.offsetX),
-			startY = scaleOffsetY(e.offsetY);
-
-			for (var i = 0; i < config.emitterNum; i++) {
-				addParticle(startX, startY);
+				showMessage("Please wait and enjoy the show...");
+				await delay(5000);
 			}
 		},
 		false
@@ -148,11 +168,10 @@ function init () {
 	window.onresize = function () {
 		fullScreen();
 	};
-
 	loop();
 }
 
-function fullScreen () {
+function fullScreen() {
 	var w = config.stageW, h = config.stageH, ww = window.innerWidth, wh = window.innerHeight;
 
 	if (mobile) {
@@ -182,12 +201,12 @@ function fullScreen () {
 	}
 }
 
-function addStage () {
+function addStage() {
 	var stage = new Stage();
 	showList.push(stage);
 }
 
-function addInstructions () {
+function addInstructions() {
 	var text;
 
 	if (config.preface.length <= 0) {
@@ -200,7 +219,7 @@ function addInstructions () {
 	showList.push(prefaceTxt);
 }
 
-function getParticlesPosition () {
+function getParticlesPosition() {
 	if (!config.matrix) {
 		return;
 	}
@@ -210,15 +229,15 @@ function getParticlesPosition () {
 
 		for (var j = 0, n = item.length; j < n; j++) {
 			if (item[j]) {
-				positionList.push({x : j * particleW, y : i * particleH});
+				positionList.push({ x: j * particleW, y: i * particleH });
 			}
 		}
 	}
 }
 
-function addParticle (startX, startY) {
+function addParticle(startX, startY) {
 	var index = Math.floor(Math.random() * (positionList.length - 1)),
-	pos = positionList[index];
+		pos = positionList[index];
 
 	if (!pos) {
 		return;
@@ -228,20 +247,22 @@ function addParticle (startX, startY) {
 	showList.push(particle);
 
 	positionList.splice(index, 1);
+
 }
 
-function scaleOffsetX (v) {
+function scaleOffsetX(v) {
 	return (v - marginLeft) * config.stageW / canvasStyleWidth;
 }
 
-function scaleOffsetY (v) {
+function scaleOffsetY(v) {
 	return (v - marginTop) * config.stageH / canvasStyleHeight;
 }
 
-function loop () {
+function loop() {
 	ctx.clearRect(0, 0, canvasTag.width, canvasTag.height);
 
 	for (var i = 0, l = showList.length; i < l; i++) {
+
 		showList[i].loop();
 	}
 

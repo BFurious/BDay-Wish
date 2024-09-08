@@ -4,7 +4,7 @@ var config_default = {
 	stageH : 480,
 	col : 40,
 	row : 24,
-	emitterNum : 10,
+	emitterNum : 10000,
 
 	preface : [
 		"Tap to open my greeting card~",

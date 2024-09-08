@@ -19,6 +19,7 @@ function Particle (startX, startY, endX, endY) {
 }
 
 Particle.prototype = {
+	
 	loop : function () {
 		var s = this;
 
