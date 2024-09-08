@@ -15,7 +15,7 @@ ctx = canvas.getContext("2d");
 
 let currentSongIndex = 0;
 const songs = [celebrationSong, celebrationSong2];
-const gifs = ["dirtygifAnimation", "gifAnimation"];
+const gifs = ["gifAnimation","dirtygifAnimation"];
 // Function to play the next song
 function playNextSong() {
   // Stop any currently playing song
