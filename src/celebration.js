@@ -1,5 +1,6 @@
 const celebrationSong = document.getElementById('celebrationSong');
 const celebrationSong2 = document.getElementById('celebrationSong2');
+const celebrationSong3 = document.getElementById('celebrationSong3');
 const giftBox_1 = document.getElementById('giftBox1');
 const giftBox_2 = document.getElementById('giftBox2');
 const cake = document.getElementById('cake');
@@ -14,8 +15,8 @@ canvas = document.getElementById("mycanvas");
 ctx = canvas.getContext("2d");
 
 let currentSongIndex = 0;
-const songs = [celebrationSong, celebrationSong2];
-const gifs = ["gifAnimation","dirtygifAnimation"];
+const songs = [celebrationSong, celebrationSong2, celebrationSong3];
+const gifs = ["gifAnimation","dirtygifAnimation1", "dirtygifAnimation2"];
 // Function to play the next song
 function playNextSong() {
   // Stop any currently playing song
@@ -24,7 +25,7 @@ function playNextSong() {
   document.body.style.animation = ``;
   // Move to the next song in the queue
   currentSongIndex = (currentSongIndex + 1) % songs.length;
-  document.body.style.animation = `${gifs[currentSongIndex]} 20s infinite`;
+  document.body.style.animation = `${gifs[currentSongIndex]} 40s infinite`;
   songs[currentSongIndex].play();
 }
 
@@ -93,6 +94,7 @@ function unlitCandle(e) {
         const book = document.getElementsByClassName("card-container")[0];
         if (unlitCandles.length === numCandles) {
             allCandlesUnlit = true;
+            playNextSong();
             cakeCandleContainer.classList.add('zoom-out');
             setTimeout(()=>{
                 cakeCandleContainer.style.display = "none";
